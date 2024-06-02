@@ -17,6 +17,7 @@ jobs:
         run: |
           COBROWSE_VERSION=$(wget -O - -o /dev/null https://raw.githubusercontent.com/cobrowseio/cobrowse-sdk-ios-binary/master/CobrowseIO.podspec | grep -Eo "s\.version\ +=\ +'[0-9]+\.[0-9]+\.[0-9]+'" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
           sed -i '.bak' "s/\(s\.dependency\ *'CobrowseIO\/XCFramework'\,\ *'\).*/\\1${COBROWSE_VERSION}'/" cobrowse-sdk-react-native.podspec
-      - name: Print diff
-        run: |
-          git diff
+      - name: cat android/build.gradle
+        run: cat android/build.gradle
+      - name: cat cobrowse-sdk-react-native.podspec
+        run: cat cobrowse-sdk-react-native.podspec
