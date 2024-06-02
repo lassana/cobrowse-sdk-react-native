@@ -17,9 +17,9 @@ jobs:
           COBROWSE_VERSION=$(wget -O - -o /dev/null https://raw.githubusercontent.com/cobrowseio/cobrowse-sdk-android-binary/master/io/cobrowse/cobrowse-sdk-android/maven-metadata.xml | grep -Eo '<version>[0-9]+\.[0-9]+\.[0-9]+(-SNAPSHOT)?</version>' | grep -Eo '([0-9]+\.[0-9]+\.[0-9]+(-SNAPSHOT)?)' | sort --version-sort -r | head -n 1)
           sed -i '.bak' "s/\(io\.cobrowse\:cobrowse-sdk-android\:\).*/\\1${COBROWSE_VERSION}'/" android/build.gradle
       - name:
-         run: |
-           COBROWSE_VERSION=$(wget -O - -o /dev/null https://raw.githubusercontent.com/cobrowseio/cobrowse-sdk-ios-binary/master/CobrowseIO.podspec | grep -Eo "s\.version\ +=\ +'[0-9]+\.[0-9]+\.[0-9]+'" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
-           sed -i '.bak' "s/\(s\.dependency\ *'CobrowseIO\/XCFramework'\,\ *'\).*/\\1${COBROWSE_VERSION}'/" cobrowse-sdk-react-native.podspec
+        run: |
+          COBROWSE_VERSION=$(wget -O - -o /dev/null https://raw.githubusercontent.com/cobrowseio/cobrowse-sdk-ios-binary/master/CobrowseIO.podspec | grep -Eo "s\.version\ +=\ +'[0-9]+\.[0-9]+\.[0-9]+'" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          sed -i '.bak' "s/\(s\.dependency\ *'CobrowseIO\/XCFramework'\,\ *'\).*/\\1${COBROWSE_VERSION}'/" cobrowse-sdk-react-native.podspec
       # If the SDKs were updated, commit the changes and open a new pull request
       - name: Create a new pull request
         env:
